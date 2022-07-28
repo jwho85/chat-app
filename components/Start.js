@@ -94,7 +94,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         fontWeight: '300',
         color: '#757083',
-        opacity: '50%',
+        opacity: 0.5,
         padding: '2%',
     },
     button: {
@@ -116,18 +116,19 @@ const styles = StyleSheet.create({
         width: '90%',
     },
     titleContainer: {
-        height: '28%',
-        justifyContent: 'center',
+        height: '50%',
+        justifyContent: 'flex-start',
         alignItems: 'center',
+        paddingTop: 100,
     },
     blankBox: {
-        height: '20%',
+        height: '0%',
     },
     chooseBackground: {
         fontSize: 16,
         fontWeight: '300',
         color: '#757083',
-        opacity: '100%',
+        opacity: 1,
         marginBottom: 10,
     },
     blackButton: {
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#B9C6AE',
     },
     colorContainer: {
-        height: 230,
+        height: 140,
         justifyContent: 'center',
     },
     colorChildContainer: {
