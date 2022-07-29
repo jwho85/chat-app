@@ -86,8 +86,8 @@ export default class Chat extends React.Component {
 //styles
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: chatColor,
+        // flex: 1,
+        // backgroundColor: chatColor,
     },
 });
 
