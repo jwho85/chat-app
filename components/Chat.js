@@ -21,7 +21,7 @@ export default class Chat extends React.Component {
             messages: [
                 {
                     _id: 1,
-                    text: 'Hello' + { name },
+                    text: 'Hello' + name,
                     createdAt: new Date(),
                     user: {
                         _id: 2,
@@ -31,7 +31,7 @@ export default class Chat extends React.Component {
                 },
                 {
                     _id: 2,
-                    text: { name } + 'has entered the chat',
+                    text: name + 'has entered the chat',
                     createdAt: new Date(),
                     system: true,
                 },
@@ -68,7 +68,7 @@ export default class Chat extends React.Component {
         this.props.navigation.setOptions({ title: name });
 
         return (
-            <View style={styles.container}>
+            <View style={{ backgroundColor: chatColor, flex: 1 }}>
                 <GiftedChat
                     renderBubble={this.renderBubble.bind(this)}
                     messages={this.state.messages}
@@ -87,7 +87,7 @@ export default class Chat extends React.Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        // backgroundColor: { chatColor },
+        backgroundColor: chatColor,
     },
 });
 
