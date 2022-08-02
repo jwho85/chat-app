@@ -13,6 +13,7 @@ export default class Chat extends React.Component {
         super();
         this.state = {
             messages: [],
+            uid: 0,
             loggedInText: 'Please wait, you are getting logged in',
             user: {
                 _id: '',
