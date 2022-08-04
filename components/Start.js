@@ -37,11 +37,11 @@ export default class Start extends React.Component {
                             <View style={styles.colorChildContainer}>
                                 <TouchableOpacity
                                     style={styles.blackButton}
-                                    onPress={() => this.changeBackgroundColor('#090C08')}
+                                    onPress={() => this.changeBackgroundColor('#474056')}
                                 ></TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.purpleButton}
-                                    onPress={() => this.changeBackgroundColor('#474056')}
+                                    onPress={() => this.changeBackgroundColor('#090C08')}
                                 ></TouchableOpacity>
                                 <TouchableOpacity
                                     style={styles.blueButton}

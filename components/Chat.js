@@ -80,9 +80,9 @@ export default class Chat extends React.Component {
         this.referenceChatMessages = firebase.firestore().collection('messages');
 
         // listen to authentication events
-        this.authUnsubscribe = firebase.auth().onAuthStateChanged((user) => {
+        this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
             if (!user) {
-                firebase.auth().signInAnonymously();
+                await firebase.auth().signInAnonymously();
             }
             //update user state with currently active user data
             this.setState({
