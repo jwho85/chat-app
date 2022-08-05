@@ -111,10 +111,8 @@ export default class Chat extends React.Component {
     onSend(messages = []) {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages),
-        })),
-            () => {
-                this.addMessages(this.state.messages[0]);
-            }
+        }));
+        this.addMessages(this.state.messages[0]);
     }
 
     //change the styling of the chat bubble
