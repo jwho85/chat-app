@@ -34,7 +34,7 @@ export default class Chat extends React.Component {
                 measurementId: "G-DP11E8ELL8",
             });
         }
-        this.referenceChatMessages = null;
+        this.referenceChatMessages = firebase.firestore().collection('messages');
     }
 
     onCollectionUpdate = (querySnapshot) => {
