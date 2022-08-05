@@ -59,7 +59,7 @@ export default class Chat extends React.Component {
         });
     }
 
-    addMessages(data) {
+    addMessages = (data) => {
         // add a new list to the collection
         this.referenceChatMessages.add({
             _id: data._id,
