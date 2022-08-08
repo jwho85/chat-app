@@ -35,6 +35,7 @@ export default class Chat extends React.Component {
             });
         }
         this.referenceChatMessages = firebase.firestore().collection('messages');
+        this.referenceChatUser = null;
     }
 
     onCollectionUpdate = (querySnapshot) => {
@@ -64,7 +65,7 @@ export default class Chat extends React.Component {
         this.referenceChatMessages.add({
             _id: data._id,
             text: data.text,
-            createdAt: data.createdAt.toDate(),
+            createdAt: data.createdAt,
             user: data.user,
             uid: this.state.uid,
         });
@@ -94,6 +95,10 @@ export default class Chat extends React.Component {
                     name: name,
                 },
             });
+            this.referenceChatUser = firebase
+                .firestore()
+                .collection("messages")
+                .where("uid", '==', this.state.uid);
             this.unsubscribe = this.referenceChatMessages
                 .orderBy("createdAt", "desc")
                 .onSnapshot(this.onCollectionUpdate);
@@ -111,8 +116,9 @@ export default class Chat extends React.Component {
     onSend(messages = []) {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages),
-        }));
-        this.addMessages(this.state.messages[0]);
+        }), () => {
+            this.addMessages(this.state.messages[0]);
+        });
     }
 
     //change the styling of the chat bubble
