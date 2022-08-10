@@ -74,6 +74,7 @@ export default class Chat extends React.Component {
         });
     }
 
+    //get messages from local storage
     async getMessages() {
         let messages = '';
         try {
@@ -86,6 +87,7 @@ export default class Chat extends React.Component {
         }
     };
 
+    //save messages to local storage
     async saveMessages() {
         try {
             await AsyncStorage.setItem('messages', JSON.stringify(this.state.messages));
@@ -94,6 +96,7 @@ export default class Chat extends React.Component {
         }
     }
 
+    //delete messages from local storage
     async deleteMessages() {
         try {
             await AsyncStorage.removeItem('messages');
@@ -111,6 +114,7 @@ export default class Chat extends React.Component {
         let name = this.props.route.params.name;
         this.props.navigation.setOptions({ title: name });
 
+        //check if the user is connected
         NetInfo.fetch().then(connection => {
             if (connection.isConnected) {
                 console.log('online');
@@ -121,7 +125,7 @@ export default class Chat extends React.Component {
             }
         });
 
-        if (isConnected) {
+        if (this.state.isConnected) {
             // creating a references to messages collection
             this.referenceChatMessages = firebase.firestore().collection('messages');
 
@@ -140,6 +144,7 @@ export default class Chat extends React.Component {
                         name: name,
                     },
                 });
+                //connect to firebase by uid
                 this.referenceChatUser = firebase
                     .firestore()
                     .collection("messages")
@@ -185,6 +190,7 @@ export default class Chat extends React.Component {
         )
     }
 
+    //only display the input toolbar if the user is connected to the internet
     renderInputToolbar(props) {
         if (this.state.isConnected == false) {
         } else {
@@ -206,7 +212,7 @@ export default class Chat extends React.Component {
                     renderBubble={this.renderBubble.bind(this)}
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
-                    renderInputToolbar={this.renderInputToolbar}
+                    renderInputToolbar={this.renderInputToolbar.bind(this)}
                     user={{ _id: this.state.user._id, name: this.state.user.name }}
                 />
                 {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
