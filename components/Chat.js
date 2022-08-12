@@ -3,10 +3,12 @@ import { StyleSheet, View, Text, Platform, KeyboardAvoidingView, Button, FlatLis
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from '@react-native-community/netinfo';
+import CustomActions from './CustomActions';
+import MapView from 'react-native-maps';
 
 const firebase = require('firebase');
 require('firebase/firestore');
-require('firebase/auth')
+require('firebase/auth');
 
 //the application's chat page
 export default class Chat extends React.Component {
@@ -23,6 +25,11 @@ export default class Chat extends React.Component {
                 avatar: '',
             },
             isConnected: false,
+            image: null,
+            location: {
+                latitude: null,
+                longitutde: null,
+            },
         };
 
         if (!firebase.apps.length) {
@@ -55,7 +62,9 @@ export default class Chat extends React.Component {
                     _id: data.user._id,
                     name: data.user.name,
                     avatar: data.user.avatar,
-                }
+                },
+                image: data.image,
+                location: data.location,
             });
         });
         this.setState({
@@ -71,6 +80,8 @@ export default class Chat extends React.Component {
             createdAt: data.createdAt,
             user: data.user,
             uid: this.state.uid,
+            image: data.image,
+            location: data.location,
         });
     }
 
@@ -113,6 +124,7 @@ export default class Chat extends React.Component {
         //set the navigation title to name
         let name = this.props.route.params.name;
         this.props.navigation.setOptions({ title: name });
+        this.setState({ loggedInText: 'Welcome to the chat room' });
 
         //check if the user is connected
         NetInfo.fetch().then(connection => {
@@ -138,7 +150,6 @@ export default class Chat extends React.Component {
                 this.setState({
                     uid: user.uid,
                     messages: [],
-                    loggedInText: 'Welcome to the chat room',
                     user: {
                         _id: user.uid,
                         name: name,
@@ -160,10 +171,12 @@ export default class Chat extends React.Component {
     }
 
     componentWillUnmount() {
-        // stop listening to authentication
-        this.authUnsubscribe();
-        // stop listening for changes
-        this.unsubscribe();
+        if (this.state.isConnected) {
+            // stop listening to authentication
+            this.authUnsubscribe();
+            // stop listening for changes
+            this.unsubscribe();
+        }
     }
 
     //append new messages to previous messages
@@ -171,8 +184,10 @@ export default class Chat extends React.Component {
         this.setState(previousState => ({
             messages: GiftedChat.append(previousState.messages, messages),
         }), () => {
-            this.addMessages(this.state.messages[0]);
             this.saveMessages();
+            if (this.state.isConnected) {
+                this.addMessages(this.state.messages[0]);
+            }
         });
     }
 
@@ -202,17 +217,46 @@ export default class Chat extends React.Component {
         }
     }
 
+    renderCustomActions = (props) => {
+        return <CustomActions {...props} />;
+    };
+
+    renderCustomView(props) {
+        const { currentMessage } = props;
+        if (currentMessage.location) {
+            return (
+                <MapView
+                    style={{
+                        width: 150,
+                        height: 100,
+                        borderRadius: 13,
+                        margin: 3
+                    }}
+                    region={{
+                        latitude: currentMessage.location.latitude,
+                        longitude: currentMessage.location.longitude,
+                        latitudeDelta: 0.0922,
+                        longitudeDelta: 0.0421,
+                    }}
+                />
+            );
+        }
+        return null;
+    }
+
     render() {
         let chatColor = this.props.route.params.chatColor;
 
         return (
-            <View style={[{ backgroundColor: chatColor }, { flex: 1 }]}>
+            <View style={[{ backgroundColor: chatColor }, styles.container]}>
                 <Text>{this.state.loggedInText}</Text>
                 <GiftedChat
                     renderBubble={this.renderBubble.bind(this)}
+                    renderInputToolbar={this.renderInputToolbar.bind(this)}
+                    renderActions={this.renderCustomActions.bind(this)}
+                    renderCustomView={this.renderCustomView}
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
-                    renderInputToolbar={this.renderInputToolbar.bind(this)}
                     user={{ _id: this.state.user._id, name: this.state.user.name }}
                 />
                 {Platform.OS === 'android' ? <KeyboardAvoidingView behavior="height" /> : null}
@@ -223,7 +267,9 @@ export default class Chat extends React.Component {
 
 //styles
 const styles = StyleSheet.create({
-
+    container: {
+        flex: 1,
+    },
 });
 
 
