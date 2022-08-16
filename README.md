@@ -31,10 +31,10 @@ The objective of this project is to build a chat app for mobile devices using Re
 
 -Android Studio
 
-Step 1: Download Android Studio
-Step 2: Set Up Android Emulator
-Step 3: Configure Android Studio from the Welcome Screen
-Step 4: Virtual Device Manager
+Step 1: Download Android Studio<br />
+Step 2: Set Up Android Emulator<br />
+Step 3: Configure Android Studio from the Welcome Screen<br />
+Step 4: Virtual Device Manager<br />
 Step 5: Start Your Emulator
 
 -Install Gifted Chat

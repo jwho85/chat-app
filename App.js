@@ -14,10 +14,6 @@ const Stack = createStackNavigator();
 
 export default class App extends React.Component {
 
-  renderCustomActions = (props) => {
-    return <CustomActions {...props} />;
-  };
-
   render() {
     return (
       <NavigationContainer>
