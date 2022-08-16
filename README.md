@@ -68,7 +68,7 @@ if (!firebase.apps.length){
 
 `expo install @react-native-community/netinfo`
 
--Install the ImagePicker API and the Permissions API
+-Install Expo Permissions and Expo Image Picker
 
 `expo install expo-permissions`
 `expo install expo-image-picker`
