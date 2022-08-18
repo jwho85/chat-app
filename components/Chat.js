@@ -135,39 +135,39 @@ export default class Chat extends React.Component {
                 console.log('offline');
                 this.setState({ isConnected: false });
             }
-        });
 
-        if (this.state.isConnected) {
-            // creating a references to messages collection
-            this.referenceChatMessages = firebase.firestore().collection('messages');
+            if (connection.isConnected) {
+                // creating a references to messages collection
+                this.referenceChatMessages = firebase.firestore().collection('messages');
 
-            // listen to authentication events
-            this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
-                if (!user) {
-                    await firebase.auth().signInAnonymously();
-                }
-                //update user state with currently active user data
-                this.setState({
-                    uid: user.uid,
-                    messages: [],
-                    user: {
-                        _id: user.uid,
-                        name: name,
-                    },
+                // listen to authentication events
+                this.authUnsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+                    if (!user) {
+                        await firebase.auth().signInAnonymously();
+                    }
+                    //update user state with currently active user data
+                    this.setState({
+                        uid: user.uid,
+                        messages: [],
+                        user: {
+                            _id: user.uid,
+                            name: name,
+                        },
+                    });
+                    //connect to firebase by uid
+                    this.referenceChatUser = firebase
+                        .firestore()
+                        .collection("messages")
+                        .where("uid", '==', this.state.uid);
+                    this.unsubscribe = this.referenceChatMessages
+                        .orderBy("createdAt", "desc")
+                        .onSnapshot(this.onCollectionUpdate);
                 });
-                //connect to firebase by uid
-                this.referenceChatUser = firebase
-                    .firestore()
-                    .collection("messages")
-                    .where("uid", '==', this.state.uid);
-                this.unsubscribe = this.referenceChatMessages
-                    .orderBy("createdAt", "desc")
-                    .onSnapshot(this.onCollectionUpdate);
-            });
-            this.saveMessages();
-        } else {
-            this.getMessages();
-        }
+                this.saveMessages();
+            } else {
+                this.getMessages();
+            }
+        });
     }
 
     componentWillUnmount() {
@@ -253,7 +253,7 @@ export default class Chat extends React.Component {
                 <GiftedChat
                     renderBubble={this.renderBubble.bind(this)}
                     renderInputToolbar={this.renderInputToolbar.bind(this)}
-                    renderActions={this.renderCustomActions.bind(this)}
+                    renderActions={this.renderCustomActions}
                     renderCustomView={this.renderCustomView}
                     messages={this.state.messages}
                     onSend={messages => this.onSend(messages)}
