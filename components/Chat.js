@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View, Text, Platform, KeyboardAvoidingView, Button, FlatList } from 'react-native';
+import { StyleSheet, View, Text, Platform, KeyboardAvoidingView } from 'react-native';
 import { GiftedChat, Bubble, InputToolbar } from 'react-native-gifted-chat';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import NetInfo from '@react-native-community/netinfo';

@@ -10,8 +10,9 @@ import * as ImagePicker from "expo-image-picker";
 import * as Location from "expo-location";
 import firebase from 'firebase';
 import firestore from 'firebase';
+import { connectActionSheet } from '@expo/react-native-action-sheet';
 
-export default class CustomActions extends React.Component {
+class CustomActions extends React.Component {
     /**
      * Let the user pick an image from the device's image library
      * @function imagePicker
@@ -135,7 +136,7 @@ export default class CustomActions extends React.Component {
             "Cancel",
         ];
         const cancelButtonIndex = options.length - 1;
-        this.context.actionSheet().showActionSheetWithOptions(
+        this.props.showActionSheetWithOptions(
             {
                 options,
                 cancelButtonIndex,
@@ -196,6 +197,6 @@ const styles = StyleSheet.create({
     },
 });
 
-CustomActions.contextTypes = {
-    actionSheet: PropTypes.func,
-};
+const ConnectedApp = connectActionSheet(CustomActions);
+
+export default ConnectedApp;
