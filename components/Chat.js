@@ -26,10 +26,7 @@ export default class Chat extends React.Component {
             },
             isConnected: false,
             image: null,
-            location: {
-                latitude: null,
-                longitutde: null,
-            },
+            location: null,
         };
 
         if (!firebase.apps.length) {
@@ -63,8 +60,8 @@ export default class Chat extends React.Component {
                     name: data.user.name,
                     avatar: data.user.avatar,
                 },
-                image: data.image,
-                location: data.location,
+                image: data.image || null,
+                location: data.location || null,
             });
         });
         this.setState({
@@ -76,12 +73,11 @@ export default class Chat extends React.Component {
         // add a new list to the collection
         this.referenceChatMessages.add({
             _id: data._id,
-            text: data.text,
+            text: data.text || "",
             createdAt: data.createdAt,
             user: data.user,
-            uid: this.state.uid,
-            image: data.image,
-            location: data.location,
+            image: data.image || null,
+            location: data.location || null,
         });
     }
 
