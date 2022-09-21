@@ -2,7 +2,49 @@
 
 The objective of this project was to build a chat app for mobile devices using React Native. The app will provide users with a chat interface and options to share images and their location.  
 
-## Directions for creating this app
+## Tech
+
+<ul>
+<li>Expo</li>
+<li>React Navigation</li>
+<li>Gifted Chat</li>
+<li>Firestore</li>
+<li>AsyncStorage</li>
+<li>NetInfo</li>
+<li>Expo Permissions</li>
+<li>Expo Image Picker</li>
+<li>Expo Location</li>
+<li>React Native Maps</li>
+</ul>
+
+## Dependencies
+
+"@expo/react-native-action-sheet": "^3.13.0",<br>
+"@react-native-async-storage/async-storage": "~1.17.3",<br>
+"@react-native-community/masked-view": "^0.1.11",<br>
+"@react-native-community/netinfo": "8.2.0",<br>
+"@react-navigation/native": "^6.0.11",<br>
+"@react-navigation/stack": "^6.2.2",<br>
+"cookies": "^0.8.0",<br>
+"expo": "~45.0.0",<br>
+"expo-image-picker": "~13.1.1",<br>
+"expo-location": "~14.2.2",<br>
+"expo-permissions": "~13.2.0",<br>
+"expo-status-bar": "~1.3.0",<br>
+"firebase": "^7.9.0",<br>
+"react": "17.0.2",<br>
+"react-dom": "17.0.2",<br>
+"react-native": "0.68.2",<br>
+"react-native-gesture-handler": "~2.2.1",<br>
+"react-native-gifted-chat": "^1.0.4",<br>
+"react-native-maps": "0.30.2",<br>
+"react-native-reanimated": "~2.8.0",<br>
+"react-native-safe-area-context": "4.2.4",<br>
+"react-native-screens": "~3.11.1",<br>
+"react-native-web": "0.17.7",<br>
+"react-navigation": "^4.4.4"
+
+## Get Started
 
 -Install expo
 
