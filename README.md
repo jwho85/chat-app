@@ -17,6 +17,25 @@ The objective of this project was to build a chat app for mobile devices using R
 <li>React Native Maps</li>
 </ul>
 
+## The 5 Ws
+
+1. Who—The users of the mobile chat app. These could be friends, family or other students on this course. Your codebase will be used by other developers working on the product. 
+2. What—A native chat app built with React Native, as well as all the relevant documentation. 
+3. When—Whenever users of your chat app want to communicate with each other.
+4. Where—The app will be optimized for both Android and iOS devices. You will use Expo to develop the app and Google Firestore to store the chat messages.
+5. Why—Mobile chat apps are among the most commonly downloaded and used apps in the world, so knowing how to build a chat app is an indispensable skill. The app will demonstrate your React Native development skills.
+
+## User Stories
+
+<ul> 
+<li>As a new user, I want to be able to easily enter a chat room so I can quickly start talking to my friends and family.</li>
+<li>As a user, I want to be able to send messages to my friends and family members to exchange the latest news.</li>
+<li>As a user, I want to send images to my friends to show them what I’m currently doing.</li>
+<li>As a user, I want to share my location with my friends to show them where I am.</li>
+<li>As a user, I want to be able to read my messages offline so I can reread conversations at any time.</li>
+<li>As a user with a visual impairment, I want to use a chat app that is compatible with a screen reader so that I can engage with a chat interface.</li>
+</ul>
+
 ## Dependencies
 
 "@expo/react-native-action-sheet": "^3.13.0",<br>
